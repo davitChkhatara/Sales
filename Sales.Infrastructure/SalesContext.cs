@@ -18,10 +18,6 @@ namespace Sales.Infrastructure
 
         public DbSet<Employee> Employees { get; set; }
 
-        public SalesContext()
-        {
-
-        }
         public SalesContext(DbContextOptions<SalesContext> options)
             : base(options)
         {
