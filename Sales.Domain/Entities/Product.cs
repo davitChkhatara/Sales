@@ -17,5 +17,7 @@ namespace Sales.Domain.Entities
         public ProductType ProductType { get; set; }
 
         public decimal Price { get; set; }
+
+        public ICollection<SalesOrder> SalesOrders { get; set; }
     }
 }

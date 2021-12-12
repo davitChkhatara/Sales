@@ -14,6 +14,7 @@ namespace Sales.Infrastructure.Configurations
             builder.ToTable("SalesOrders");
 
             builder.HasOne(s => s.Employee).WithMany(e => e.SalesOrders).HasForeignKey(e => e.EmployeeId).IsRequired();
+            builder.HasOne(s => s.Product).WithMany(t => t.SalesOrders).HasForeignKey(p => p.ProductId).IsRequired();
 
             builder.HasIndex(s => s.EmployeeId).IsUnique(false);
         }

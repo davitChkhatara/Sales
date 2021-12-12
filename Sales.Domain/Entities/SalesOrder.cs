@@ -23,6 +23,8 @@ namespace Sales.Domain.Entities
 
         public long ProductId { get; set; }
 
+        public Product Product { get; set; }
+
         public Employee Employee { get; set; }
     }
 }
