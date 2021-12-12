@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Sales.Application.Enums;
 using Sales.Application.Helpers;
 using Sales.Application.Interfaces;
 using Sales.Domain.Entities;
@@ -23,16 +24,16 @@ namespace Sales.Application.Employees.Commands.CreateEmployee
         }
         public async Task<IResponse<CreateEmployeeCommandResponse>> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employeeExists = _context.Employees.FirstOrDefault(e => e.PersonalId.Equals(request.PersonalId)) != null;
+            var employeeExists = _context.Employees.FirstOrDefault(e => e.PersonalId.Equals(request.PersonalId) && e.Status == EmployeeStatus.Active) != null;
             if (employeeExists)
             {
-                throw new EmployeeAlreadyExistsException();
+                return ResponseHelper.Fail<CreateEmployeeCommandResponse>(ResponseStatusCode.Error, "Employee with given parameters already exists");
             }
             var hasParent = request.ManagerId.HasValue && request.ManagerId > 0;
             var validParent = hasParent ? _context.Employees.FirstOrDefault(e => e.Id == request.ManagerId && e.Status == EmployeeStatus.Active) != null : true;
             if (!validParent)
             {
-                throw new ManagerIdNotValidException();
+                return ResponseHelper.Fail<CreateEmployeeCommandResponse>(ResponseStatusCode.Error, "manager id doesn't exist or is not active");
             }
 
             var employee = new Employee

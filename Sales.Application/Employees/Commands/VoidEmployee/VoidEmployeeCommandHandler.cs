@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Sales.Application.Enums;
 using Sales.Application.Helpers;
 using Sales.Application.Interfaces;
 using Sales.Domain.Enums;
@@ -26,7 +27,7 @@ namespace Sales.Application.Employees.Commands.VoidEmployee
             var employee = _context.Employees.FirstOrDefault(e => e.Id == request.Id && e.Status == EmployeeStatus.Active);
             if (employee == null)
             {
-                throw new EmployeeNotFoundException();
+                return ResponseHelper.Fail<VoidEmployeeCommandResponse>(ResponseStatusCode.Error, "Employee with given key was not found");
             }
 
             employee.LastUpdateDate = DateTime.Now;

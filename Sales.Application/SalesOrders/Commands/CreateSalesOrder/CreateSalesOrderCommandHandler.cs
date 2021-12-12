@@ -28,18 +28,18 @@ namespace Sales.Application.SalesOrders.Commands.CreateSalesOrder
             
             if (product == null)
             {
-                ResponseHelper.Fail(ResponseStatusCode.Error, "product was not found");
+                return ResponseHelper.Fail<CreateSalesOrderCommandResponse>(ResponseStatusCode.Error, "product was not found");
             }
 
             var employee = _context.Employees.SingleOrDefault(e => e.Id == request.EmployeeId && e.Status == EmployeeStatus.Active);
             if (employee == null)
             {
-                ResponseHelper.Fail(ResponseStatusCode.Error, "employee was not found");
+                return ResponseHelper.Fail<CreateSalesOrderCommandResponse>(ResponseStatusCode.Error, "employee was not found");
             }
 
             if(request.Qty > product.QtyOnHand)
             {
-                ResponseHelper.Fail(ResponseStatusCode.Error, "product is not available in inventory");
+                return ResponseHelper.Fail<CreateSalesOrderCommandResponse>(ResponseStatusCode.Error, "product is not available in inventory");
             }
 
             var amount = request.Qty * product.Price;
