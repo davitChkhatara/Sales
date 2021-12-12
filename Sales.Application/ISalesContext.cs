@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Sales.Domain.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace Sales.Application
 {
@@ -16,5 +17,7 @@ namespace Sales.Application
         DbSet<ProductType> ProductTypes { get; set; }
 
         DbSet<Employee> Employees { get; set; }
+
+        int SaveChanges();
     }
 }

@@ -11,6 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
+using System.Reflection;
+using MediatR;
+using Sales.Application;
+using Sales.API.MiddleWares;
 
 namespace Sales
 {
@@ -27,7 +32,12 @@ namespace Sales
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration);
+            services.AddMediatR(typeof(IApplicationAssemblyFinder).Assembly);
+
             services.AddControllers();
+
+            services.AddFluentValidation(config => config.RegisterValidatorsFromAssembly(Assembly.Load("Sales.Application")));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sales", Version = "v1" });
@@ -47,6 +57,8 @@ namespace Sales
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sales v1"));
             }
 
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();

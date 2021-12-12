@@ -10,7 +10,7 @@ namespace Sales.Domain.Entities
 
         public string Name { get; set; }
 
-        public long QtyOnHand { get; set; }
+        public decimal QtyOnHand { get; set; }
 
         public long ProductTypeId { get; set; }
 
