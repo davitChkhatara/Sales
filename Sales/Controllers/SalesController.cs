@@ -25,7 +25,7 @@ namespace Sales.API.Controllers
             return Ok(await _mediatr.Send(request));
         }
 
-        [HttpDelete]
+        [HttpPost]
         public async Task<IActionResult> ApproveSalesOrder(ApproveSalesOrderCommand request)
         {
             return Ok(await _mediatr.Send(request));

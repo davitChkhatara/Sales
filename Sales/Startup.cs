@@ -34,7 +34,12 @@ namespace Sales
             services.AddInfrastructure(Configuration);
             services.AddMediatR(typeof(IApplicationAssemblyFinder).Assembly);
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IApplicationAssemblyFinder>()).ConfigureApiBehaviorOptions(options =>
+                {
+                    // Adds a custom error response factory when ModelState is invalid
+                    options.InvalidModelStateResponseFactory = InvalidModelStateResponseFactory.ProduceErrorResponse;
+                }); ;
 
             services.AddFluentValidation(config => config.RegisterValidatorsFromAssembly(Assembly.Load("Sales.Application")));
 
