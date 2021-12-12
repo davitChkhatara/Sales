@@ -21,6 +21,8 @@ namespace Sales.Domain.Entities
 
         public decimal Amount { get; set; }
 
+        public long ProductId { get; set; }
+
         public Employee Employee { get; set; }
     }
 }

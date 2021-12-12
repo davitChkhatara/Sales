@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Sales.Application.SalesOrders.Commands.ApproveSalesOrder;
+using Sales.Application.SalesOrders.Commands.CreateSalesOrder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +20,13 @@ namespace Sales.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> CreateSalesOrder(CreateEmployeeCommand request)
+        public async Task<IActionResult> CreateSalesOrder(CreateSalesOrderCommand request)
         {
             return Ok(await _mediatr.Send(request));
         }
 
         [HttpDelete]
-        public async Task<IActionResult> CreateApproveSalesOrder(VoidEmployeeCommand request)
+        public async Task<IActionResult> ApproveSalesOrder(ApproveSalesOrderCommand request)
         {
             return Ok(await _mediatr.Send(request));
         }

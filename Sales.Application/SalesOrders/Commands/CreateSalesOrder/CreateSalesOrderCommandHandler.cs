@@ -2,6 +2,7 @@
 using Sales.Application.Enums;
 using Sales.Application.Helpers;
 using Sales.Application.Interfaces;
+using Sales.Domain.Entities;
 using Sales.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -36,8 +37,27 @@ namespace Sales.Application.SalesOrders.Commands.CreateSalesOrder
                 ResponseHelper.Fail(ResponseStatusCode.Error, "employee was not found");
             }
 
+            if(request.Qty > product.QtyOnHand)
+            {
+                ResponseHelper.Fail(ResponseStatusCode.Error, "product is not available in inventory");
+            }
 
-            throw new NotImplementedException();
+            var amount = request.Qty * product.Price;
+
+            var salesOrder = new SalesOrder
+            {
+                EmployeeId = request.EmployeeId,
+                Qty = request.Qty,
+                Amount = amount,
+                Price = product.Price,
+                Status = SalesOrderStatus.Created,
+                CreateDate = DateTime.Now
+            };
+
+            _context.SalesOrders.Add(salesOrder);
+            _context.SaveChanges();
+
+            return ResponseHelper.Ok(new CreateSalesOrderCommandResponse { Id = salesOrder.Id });
         }
     }
 }

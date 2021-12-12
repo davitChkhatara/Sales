@@ -17,6 +17,6 @@ namespace Sales.Application.SalesOrders.Commands.CreateSalesOrder
 
     public class CreateSalesOrderCommandResponse
     {
-        public long SalesOrderId { get; set; }
+        public long Id { get; set; }
     }
 }
