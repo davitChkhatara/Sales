@@ -51,7 +51,8 @@ namespace Sales.Application.SalesOrders.Commands.CreateSalesOrder
                 Amount = amount,
                 Price = product.Price,
                 Status = SalesOrderStatus.Created,
-                CreateDate = DateTime.Now
+                CreateDate = DateTime.Now,
+                ProductId = request.ProductId
             };
 
             _context.SalesOrders.Add(salesOrder);

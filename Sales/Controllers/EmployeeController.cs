@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Sales.Application.Employees.Commands.CreateEmployee;
 using Sales.Application.Employees.Commands.VoidEmployee;
+using Sales.Application.Employees.Queries.GetCommissions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,12 @@ namespace Sales.Controllers
 
         [HttpDelete]
         public async Task<IActionResult> VoidEmployee(VoidEmployeeCommand request)
+        {
+            return Ok(await _mediatr.Send(request));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetEmployeeCommissions(GetCommissionsQuery request)
         {
             return Ok(await _mediatr.Send(request));
         }

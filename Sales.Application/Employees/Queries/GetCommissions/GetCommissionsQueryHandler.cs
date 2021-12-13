@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Sales.Application.DataTransferObjects;
+using Sales.Application.Helpers;
 using Sales.Application.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,11 +10,21 @@ using System.Threading.Tasks;
 
 namespace Sales.Application.Employees.Queries.GetCommissions
 {
-    public class GetCommissionsQueryHandler : IRequestHandler<GetCommissionsQuery, IResponse<int>>
+    public class GetCommissionsQueryHandler : IRequestHandler<GetCommissionsQuery, IResponse<List<EmployeeCommissionsDto>>>
     {
-        public async Task<IResponse<int>> Handle(GetCommissionsQuery request, CancellationToken cancellationToken)
+
+        private readonly ICommissionRepository _repo;
+
+        public GetCommissionsQueryHandler(ICommissionRepository repo)
         {
-            throw new NotImplementedException();
+            _repo = repo;
+        }
+
+        public async Task<IResponse<List<EmployeeCommissionsDto>>> Handle(GetCommissionsQuery request, CancellationToken cancellationToken)
+        {
+            var res = await _repo.GetCommissions(new Models.GetCommissionsRequest { EmployeeId = request.EmployeeId ,TransDate = request.TransDate});
+
+            return ResponseHelper.Ok(res);
         }
     }
 }

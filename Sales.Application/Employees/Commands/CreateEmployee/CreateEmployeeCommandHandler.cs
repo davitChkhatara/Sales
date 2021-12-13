@@ -36,6 +36,12 @@ namespace Sales.Application.Employees.Commands.CreateEmployee
                 return ResponseHelper.Fail<CreateEmployeeCommandResponse>(ResponseStatusCode.Error, "manager id doesn't exist or is not active");
             }
 
+            var manager = _context.Employees.FirstOrDefault(e => e.ManagerId == request.ManagerId && e.Status == EmployeeStatus.Active);
+            if (manager != null)
+            {
+                return ResponseHelper.Fail<CreateEmployeeCommandResponse>(ResponseStatusCode.Error, "manager already has registered sales agent");
+            }
+
             var employee = new Employee
             {
                 ManagerId = hasParent ? request.ManagerId : null,

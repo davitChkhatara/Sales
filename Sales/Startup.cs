@@ -16,6 +16,7 @@ using System.Reflection;
 using MediatR;
 using Sales.Application;
 using Sales.API.MiddleWares;
+using Sales.Application.Options;
 
 namespace Sales
 {
@@ -48,6 +49,9 @@ namespace Sales
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sales", Version = "v1" });
             });
 
+            services.AddOptions();
+
+            services.Configure<DatabaseOptions>(Configuration.GetSection("ConnectionStrings"));
 
         }
 
