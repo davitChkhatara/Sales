@@ -1,6 +1,7 @@
 # Sales
 
 --initial data  with products
+
 insert into ProductTypes(TypeCode,Name)
 values('BAN','Banana'),
 ('MAN','Mandarin'),
@@ -15,6 +16,6 @@ VALUES('Asian Banana',100,1,2.3),
 CREATE  TABLE VALUED FUNCTION AND  STORE  PROCEDURE  BEFORE  TESTING
 
 SQL  Files  are in Infrastructure->SQL Files  Folder
-1)CreateTableValuedFunction - get commission.sql  -  execute this  procedure
-2)
+1)CreateTableValuedFunction - get commission.sql  -  execute this  script
+2)CreateStoredProcedure - calculate commission.sql  - execute this script
 
