@@ -11,3 +11,10 @@ insert into Products(Name,QtyOnHand,ProductTypeId,Price)
 VALUES('Asian Banana',100,1,2.3),
 ('6 Pack Mango',123,4,1.7);
 
+
+CREATE  TABLE VALUED FUNCTION AND  STORE  PROCEDURE  BEFORE  TESTING
+
+SQL  Files  are in Infrastructure->SQL Files  Folder
+1)CreateTableValuedFunction - get commission.sql  -  execute this  procedure
+2)
+
