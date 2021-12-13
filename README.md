@@ -9,8 +9,8 @@ values('BAN','Banana'),
 ('MAN','Mango');
 
 insert into Products(Name,QtyOnHand,ProductTypeId,Price)
-VALUES('Asian Banana',100,1,2.3),
-('6 Pack Mango',123,4,1.7);
+VALUES('Asian Banana',100,(select Id from ProductTypes where TypeCode = 'BAN'),2.3),
+('6 Pack Mango',123,(select Id from ProductTypes where TypeCode = 'MAN'),1.7)
 
 
 CREATE  TABLE VALUED FUNCTION AND  STORE  PROCEDURE  BEFORE  TESTING
