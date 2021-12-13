@@ -16,7 +16,7 @@ BEGIN
 	if(@level = 1)
 		begin
 		insert into @AccumulatedCommissions(Amount,Level)
-		select @amount * 0.3 ,@level 
+		select @amount * 0.7 ,@level 
 		return
 		end
 
