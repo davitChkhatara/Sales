@@ -34,6 +34,7 @@ namespace Sales.Controllers
         }
 
         [HttpPost]
+        [Route("commissions")]
         public async Task<IActionResult> GetEmployeeCommissions(GetCommissionsQuery request)
         {
             return Ok(await _mediatr.Send(request));
